@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kontrollübersicht</title>
+</head>
+<body>
+    <h1>Kontrollübersicht</h1>
+
+    <h2>Artikel</h2>
+    {% if items %}
+        <ul>
+            {% for item in items %}
+                <li>{{ item.name }} (Barcode: {{ item.barcode }}, Kosten: {{ item.cost }}, Ablaufdatum: {{ item.expiration_Date|default:"Kein Datum" }}, Lager: {{ item.warehouse.name }})</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Keine Artikel vorhanden.</p>
+    {% endif %}
+
+    <h2>Benutzergruppen</h2>
+    {% if user_groups %}
+        <ul>
+            {% for group in user_groups %}
+                <li>{{ group.name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Keine Benutzergruppen vorhanden.</p>
+    {% endif %}
+
+    <h2>Benutzer</h2>
+    {% if users %}
+        <ul>
+            {% for user in users %}
+                <li>{{ user.name }} ({{ user.email }}, Gruppe: {{ user.usergroup.name }})</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Keine Benutzer vorhanden.</p>
+    {% endif %}
+
+    <h2>Lager</h2>
+    {% if warehouses %}
+        <ul>
+            {% for warehouse in warehouses %}
+                <li>{{ warehouse.Name }} (Benutzergruppe: {{ warehouse.usergroup.name }})</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Keine Lager vorhanden.</p>
+    {% endif %}
+
+</body>
+</html>
