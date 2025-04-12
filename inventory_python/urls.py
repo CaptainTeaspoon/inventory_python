@@ -21,4 +21,8 @@ from mainapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('kontrolluebersicht/', views.kontrolluebersicht, name='kontrolluebersicht'),
+    path('item/create/', views.item_create, name='item_create'),
+    path('user/create/', views.user_create, name='user_create'),
+    path('usergroup/create/', views.user_group_create, name='usergroup_create'),
+    path('warehouse/create/', views.warehouse_create, name='warehouse_create'),
 ]

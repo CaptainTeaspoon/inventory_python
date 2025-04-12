@@ -43,7 +43,7 @@
     {% if warehouses %}
         <ul>
             {% for warehouse in warehouses %}
-                <li>{{ warehouse.Name }} (Benutzergruppe: {{ warehouse.usergroup.name }})</li>
+                <li>{{ warehouse.Name }} (Benutzergruppe: {{ warehouse.usergroup.name }})</li>  
             {% endfor %}
         </ul>
     {% else %}
