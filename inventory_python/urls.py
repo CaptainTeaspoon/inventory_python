@@ -25,4 +25,8 @@ urlpatterns = [
     path('user/create/', views.user_create, name='user_create'),
     path('usergroup/create/', views.user_group_create, name='usergroup_create'),
     path('warehouse/create/', views.warehouse_create, name='warehouse_create'),
+    path('item/update/<int:pk>/', views.item_update, name='item_update'),
+    path('user/update/<int:pk>/', views.user_update, name='user_update'),
+    path('usergroup/update/<int:pk>/', views.user_group_update, name='usergroup_update'),
+    path('warehouse/update/<int:pk>/', views.warehouse_update, name='warehouse_update'),
 ]
