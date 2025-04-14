@@ -1,0 +1,14 @@
+{% if items %}
+    <ul>
+        {% for item in items %}
+            <li>
+                {{ item.Name }} (...)
+                <a href="{% url 'item_update' pk=item.pk %}">Bearbeiten</a>
+                <form method="post" action="{% url 'item_delete' pk=item.pk %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" onclick="return confirm('Sind Sie sicher, dass Sie diesen Artikel löschen möchten?')">Löschen</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

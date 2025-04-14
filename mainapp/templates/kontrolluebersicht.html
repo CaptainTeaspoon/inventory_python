@@ -10,7 +10,7 @@
     {% if items %}
         <ul>
             {% for item in items %}
-                <li>{{ item.name }} (Barcode: {{ item.barcode }}, Kosten: {{ item.cost }}, Ablaufdatum: {{ item.expiration_Date|default:"Kein Datum" }}, Lager: {{ item.warehouse.name }})</li>
+                <li>{{ item.name }} (ID: {{ item.id }}, Barcode: {{ item.barcode }}, Kosten: {{ item.cost }}, Ablaufdatum: {{ item.expiration_Date|default:"Kein Datum" }}, Lager: {{ item.warehouse.name }})</li>
             {% endfor %}
         </ul>
     {% else %}

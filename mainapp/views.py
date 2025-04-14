@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Items, Usergroups, Users, Warehouse
 from .forms import ItemForm, UsergroupForm, UserForm, WarehouseForm
 from django.contrib import messages
+from django.views.decorators.http import require_POST # Sicherheit für Löschoperationen
 
 # Create your views here.
 
@@ -114,3 +115,37 @@ def warehouse_update(request, pk):
     else:
         form = WarehouseForm(instance=warehouse)
     return render(request, 'warehouse_update.html', {'form': form, 'warehouse': warehouse})
+
+#Delete
+
+def item_delete(request, pk):
+    item = get_object_or_404(Items, pk=pk)
+    if request.method == 'POST':
+        item.delete()
+        messages.success(request, 'Article deleted successfully')
+        return redirect('kontrolluebersicht')
+    return render(request, 'item_delete_confirm.html', {'item': item})
+
+def user_delete(request, pk):
+    user = get_object_or_404(Users, pk=pk)
+    if request.method == 'POST':
+        user.delete()
+        messages.success(request, 'User deleted successfully')
+        return redirect('kontrolluebersicht')
+    return render(request, 'user_delete_confirm.html', {'user': user})
+
+def user_group_delete(request, pk):
+    user_group = get_object_or_404(Usergroups, pk=pk)
+    if request.method == 'POST':
+        user_group.delete()
+        messages.success(request, 'Usergroup deleted successfully')
+        return redirect('kontrolluebersicht')
+    return render(request, 'usergroup_delete_confirm.html', {'usergroup': user_group})
+
+def warehouse_delete(request, pk):
+    warehouse = get_object_or_404(Warehouse, pk=pk)
+    if request.method == 'POST':
+        warehouse.delete()
+        messages.success(request, 'User deleted successfully')
+        return redirect('kontrolluebersicht')
+    return render(request, 'warehouse_delete_confirm.html', {'user': warehouse})

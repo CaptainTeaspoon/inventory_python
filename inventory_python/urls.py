@@ -29,4 +29,12 @@ urlpatterns = [
     path('user/update/<int:pk>/', views.user_update, name='user_update'),
     path('usergroup/update/<int:pk>/', views.user_group_update, name='usergroup_update'),
     path('warehouse/update/<int:pk>/', views.warehouse_update, name='warehouse_update'),
+    path('item/delete/<int:pk>/', views.item_delete, name='item_delete'),
+    path('user/delete/<int:pk>/', views.user_delete, name='user_delete'),
+    path('usergroup/delete/<int:pk>/', views.user_group_delete, name='usergroup_delete'),
+    path('warehouse/delete/<int:pk>/', views.warehouse_delete, name='warehouse_delete'),
+    path('item/delete/confirm/', views.item_delete, name='item_delete_confirm'),
+    path('user/delete/confirm/', views.user_delete, name='user_delete_confirm'),
+    path('usergroup/delete/confirm/', views.user_group_delete, name='usergroup_delete_confirm'),
+    path('warehouse/delete/confirm/', views.warehouse_delete, name='warehouse_delete_confirm'),
 ]
