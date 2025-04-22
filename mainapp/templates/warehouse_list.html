@@ -6,7 +6,7 @@
     <h1>Lagerverwaltung</h1>
     <ul>
         {% for warehouse in warehouses %}
-            <li>{{ warehouse.Name }} (<a href="{% url 'warehouse_update' pk=warehouse.pk %}">Bearbeiten</a>)</li>
+            <li>{{ warehouse.name }} (<a href="{% url 'warehouse_update' pk=warehouse.pk %}">Bearbeiten</a>)</li>
         {% empty %}
             <li>Keine Lager vorhanden.</li>
         {% endfor %}

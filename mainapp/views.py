@@ -41,14 +41,14 @@ def item_create(request):
         form = ItemForm(request.POST)
         if form.is_valid():
             item = form.save(commit=False)
-            item.Warehouse.Usergroup = request.user.user.Usergroup  # Assign usergroup from logged-in user
+            item.Warehouse.Usergroup = request.user.userprofile.Usergroup  # Assign usergroup from logged-in user
             item.save()
             messages.success(request, 'Artikel erfolgreich erstellt!')
             return redirect('landing_page')
     else:
         form = ItemForm()
     # Limit Warehouse choices in the form based on user's group
-    form.fields['Warehouse'].queryset = Warehouse.objects.filter(Usergroup=request.user.user.Usergroup)
+    form.fields['Warehouse'].queryset = Warehouse.objects.filter(Usergroup=request.user.userprofile.Usergroup)
     return render(request, 'item_create.html', {'form': form})
 
 @login_required
@@ -57,7 +57,7 @@ def warehouse_create(request):
         form = WarehouseForm(request.POST)
         if form.is_valid():
             warehouse = form.save(commit=False)
-            warehouse.Usergroup = request.user.user.Usergroup
+            warehouse.Usergroup = request.user.userprofile.Usergroup
             warehouse.save()
             messages.success(request, 'Lager erfolgreich erstellt!')
             return redirect('warehouse_list')
@@ -92,7 +92,7 @@ def user_create(request):
 
 @login_required
 def item_update(request, pk):
-    item = get_object_or_404(Items, pk=pk, Warehouse__Usergroup=request.user.user.Usergroup)
+    item = get_object_or_404(Items, pk=pk, Warehouse__Usergroup=request.user.userprofile.Usergroup)
     if request.method == 'POST':
         form = ItemForm(request.POST, instance=item)
         if form.is_valid():
@@ -102,7 +102,7 @@ def item_update(request, pk):
     else:
         form = ItemForm(instance=item)
         # Limit Warehouse choices in the form based on user's group (optional)
-        form.fields['Warehouse'].queryset = Warehouse.objects.filter(Usergroup=request.user.user.Usergroup)
+        form.fields['Warehouse'].queryset = Warehouse.objects.filter(Usergroup=request.user.userprofile.Usergroup)
     return render(request, 'item_update.html', {'form': form, 'item': item})
 
 def user_update(request, pk):
@@ -131,7 +131,7 @@ def user_group_update(request, pk):
 
 @login_required
 def warehouse_update(request, pk):
-    warehouse = get_object_or_404(Warehouse, pk=pk, Usergroup=request.user.user.Usergroup)
+    warehouse = get_object_or_404(Warehouse, pk=pk, Usergroup=request.user.userprofile.Usergroup)
     if request.method == 'POST':
         form = WarehouseForm(request.POST, instance=warehouse)
         if form.is_valid():
@@ -147,7 +147,7 @@ def warehouse_update(request, pk):
 
 @login_required
 def item_delete(request, pk):
-    item = get_object_or_404(Items, pk=pk, Warehouse__Usergroup=request.user.user.Usergroup)
+    item = get_object_or_404(Items, pk=pk, Warehouse__Usergroup=request.user.userprofile.Usergroup)
     item.delete()
     messages.success(request, 'Article deleted successfully')
     return redirect('landing_page')
@@ -179,8 +179,8 @@ def warehouse_delete(request, pk):
 
 @login_required
 def warehouse_list(request):
-    user_group = request.user.user.Usergroup
-    warehouses = Warehouse.objects.filter(Usergroup=user_group)
+    user_group = request.user.userprofile.Usergroup
+    warehouses = Warehouse.objects.filter(usergroup=user_group)
     return render(request, 'warehouse_list.html', {'warehouses': warehouses})
 
 @login_required
@@ -188,8 +188,8 @@ def item_search(request):
     query = request.GET.get('q')
     results = []
     if query:
-        user_group = request.user.user.Usergroup
-        results = Items.objects.filter(Q(Name__icontains=query) | Q(Barcode__icontains=query), Warehouse__Usergroup=user_group)
+        user_group = request.user.userprofile.Usergroup
+        results = Items.objects.filter(Q(name__icontains=query) | Q(barcode__icontains=query), warehouse__usergroup=user_group)
     return render(request, 'item_search_results.html', {'results': results, 'query': query})
 
 def login_view(request):
