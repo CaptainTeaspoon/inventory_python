@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Suchergebnisse{% endblock %}
+
+{% block content %}
+    <h1>Suchergebnisse für "{{ query }}"</h1>
+    {% if results %}
+        <ul class="item-list">
+            {% for Item in results %}
+                <li>
+                    {{ Item.name }} (Barcode: {{ Item.barcode }}, Kosten: {{ Item.cost }}, Ablaufdatum: {{ Item.expiration_date|default:"Kein Datum" }}, Lager: {{ Item.warehouse.name }})
+                    <a href="{% url 'item_update' pk=Item.pk %}">Bearbeiten</a>
+                    <form method="post" action="{% url 'item_delete' pk=Item.pk %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-button" onclick="return confirm('Sind Sie sicher, dass Sie diesen Artikel löschen möchten?')">Löschen</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Keine Artikel gefunden, die Ihrer Suchanfrage entsprechen.</p>
+    {% endif %}
+    <p><a href="{% url 'landing_page' %}">Zurück zur Artikelübersicht</a></p>
+{% endblock %} 

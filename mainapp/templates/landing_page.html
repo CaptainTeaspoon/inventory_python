@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Artikelübersicht{% endblock %}
+
+{% block content %}
+    <div class="filter-row">
+        Filter: <input type="text" placeholder="Nach Name filtern...">
+        </div>
+
+    {% for warehouse in warehouses %}
+        <div class="warehouse-section">
+            <h3>{{ warehouse.name }}</h3>
+            <ul class="item-list">
+                {% for item in items %}
+                    {% if item.warehouse == warehouse %}
+                        <li>
+                            {{ item.name }} (Barcode: {{ item.barcode }}, Kosten: {{ item.cost }}, Ablaufdatum: {{ item.expiration_date|default:"Kein Datum" }})
+                            <form method="post" action="{% url 'item_delete' pk=item.pk %}" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="delete-button" onclick="return confirm('Sind Sie sicher, dass Sie diesen Artikel löschen möchten?')">Löschen</button>
+                            </form>
+                        </li>
+                    {% endif %}
+                {% empty %}
+                    <li>Keine Artikel in diesem Lager.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+{% endblock %}

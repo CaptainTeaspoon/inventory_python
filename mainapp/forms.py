@@ -21,3 +21,7 @@ class WarehouseForm(forms.ModelForm):
     class Meta:
         model = Warehouse
         fields = ['name', 'usergroup']
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=150)
+    password = forms.CharField(widget=forms.PasswordInput)

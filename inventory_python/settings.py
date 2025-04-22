@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'mainapp.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'inventory_python.urls'
@@ -69,6 +70,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'inventory_python.wsgi.application'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Keep the default backend
+    'mainapp.auth_backends.CustomUserBackend',    # Add your custom backend
+]
 
 
 # Database

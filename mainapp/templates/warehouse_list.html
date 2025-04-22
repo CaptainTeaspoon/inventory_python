@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Lagerverwaltung{% endblock %}
+
+{% block content %}
+    <h1>Lagerverwaltung</h1>
+    <ul>
+        {% for warehouse in warehouses %}
+            <li>{{ warehouse.Name }} (<a href="{% url 'warehouse_update' pk=warehouse.pk %}">Bearbeiten</a>)</li>
+        {% empty %}
+            <li>Keine Lager vorhanden.</li>
+        {% endfor %}
+    </ul>
+    <p><a href="{% url 'warehouse_create' %}">Neues Lager hinzufügen</a></p>
+{% endblock %}

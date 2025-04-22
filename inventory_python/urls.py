@@ -20,6 +20,7 @@ from mainapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.landing_page, name='landing_page'),
     path('kontrolluebersicht/', views.kontrolluebersicht, name='kontrolluebersicht'),
     path('item/create/', views.item_create, name='item_create'),
     path('user/create/', views.user_create, name='user_create'),
@@ -37,4 +38,9 @@ urlpatterns = [
     path('user/delete/confirm/', views.user_delete, name='user_delete_confirm'),
     path('usergroup/delete/confirm/', views.user_group_delete, name='usergroup_delete_confirm'),
     path('warehouse/delete/confirm/', views.warehouse_delete, name='warehouse_delete_confirm'),
+    path('warehouses/', views.warehouse_list, name='warehouse_list'),
+    path('search/', views.item_search, name='item_search'),
+    path('login/', views.login_view, name='login'),
+    path('register/', views.register_view, name='register'),
+    #path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
 ]
