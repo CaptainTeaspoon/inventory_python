@@ -17,11 +17,48 @@
         .item-list li { display: flex; justify-content: space-between; align-items: center; padding: 0.5em 0; border-bottom: 1px solid #eee; }
         .item-list li:last-child { border-bottom: none; }
         .delete-button { background-color: #f44336; color: white; border: none; padding: 0.5em 1em; text-align: center; text-decoration: none; display: inline-block; font-size: 0.9em; margin-left: 1em; cursor: pointer; border-radius: 3px; }
+        
+        /* Dropdown Menu Styles */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            margin: 0;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
     </style>
 </head>
 <body>
     <header>
-        <a href="#" class="user-icon">👤</a> <a href="{% url 'item_create' %}">Neuer Artikel</a>
+        <div class="dropdown">
+            <a href="#" class="user-icon">👤</a>
+            <div class="dropdown-content">
+                <a href="{% url 'usergroup_info' %}">Meine Benutzergruppe</a>
+                <a href="{% url 'logout' %}">Abmelden</a>
+            </div>
+        </div>
+        <a href="{% url 'item_create' %}">Neuer Artikel</a>
         <a href="{% url 'warehouse_list' %}">Lagerverwaltung</a>
         <form action="{% url 'item_search' %}" method="get" style="margin-left: 1em;">
             <input type="text" name="q" placeholder="Artikel suchen...">
@@ -30,7 +67,7 @@
     </header>
     <div class="container">
         {% block content %}
-            {% endblock %}
+        {% endblock %}
     </div>
 </body>
 </html>

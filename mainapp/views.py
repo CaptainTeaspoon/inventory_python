@@ -48,7 +48,7 @@ def item_create(request):
     else:
         form = ItemForm()
     # Limit Warehouse choices in the form based on user's group
-    form.fields['Warehouse'].queryset = Warehouse.objects.filter(Usergroup=request.user.userprofile.Usergroup)
+    form.fields['warehouse'].queryset = Warehouse.objects.filter(usergroup=request.user.userprofile.Usergroup)
     return render(request, 'item_create.html', {'form': form})
 
 @login_required
@@ -72,7 +72,7 @@ def user_group_create(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'User group created successfully')
-            return redirect('kontrolluebersicht') # Redirect zur Übersichtsseite
+            return redirect('landing_page') # Redirect zur Übersichtsseite
     else:
         form = UsergroupForm()
     return render(request, 'usergroup_create.html', {'form': form})
@@ -83,7 +83,7 @@ def user_create(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'User created successfully')
-            return redirect('kontrolluebersicht') # Redirect zur Übersichtsseite
+            return redirect('landing_page') # Redirect zur Übersichtsseite
     else:
         form = UserForm()
     return render(request, 'user_create.html', {'form': form})
@@ -112,7 +112,7 @@ def user_update(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, 'User updated successfully')
-            return redirect('kontrolluebersicht')
+            return redirect('landing_page')
     else:
         form = UserForm(instance=user)
     return render(request, 'user_update.html', {'form': form, 'user': user})
@@ -124,7 +124,7 @@ def user_group_update(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, 'User group updated successfully')
-            return redirect('kontrolluebersicht')
+            return redirect('landing_page')
     else:
         form = UsergroupForm(instance=user_group)
     return render(request, 'usergroup_update.html', {'form': form, 'user_group': user_group})
@@ -221,3 +221,33 @@ def register_view(request):
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
+
+@login_required
+def usergroup_info(request):
+    """
+    View to display the user's group and other users in the same group
+    """
+    user_group = request.user.userprofile.Usergroup
+    
+    # Get all users in the same usergroup
+    # Since we're using a custom User model, we need to query the UserProfile model
+    from django.contrib.auth.models import User
+    from .models import UserProfile
+    
+    # Get all user profiles with the same usergroup
+    user_profiles = UserProfile.objects.filter(Usergroup=user_group)
+    
+    # Get the associated Django users
+    users = [profile.user for profile in user_profiles]
+    
+    context = {
+        'usergroup': user_group,
+        'users': users
+    }
+    
+    return render(request, 'usergroup_info.html', context)
+
+def logout_view(request):
+    from django.contrib.auth import logout
+    logout(request)
+    return redirect('login')
