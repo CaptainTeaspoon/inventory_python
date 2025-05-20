@@ -41,7 +41,7 @@ def item_create(request):
         form = ItemForm(request.POST)
         if form.is_valid():
             item = form.save(commit=False)
-            item.Warehouse.Usergroup = request.user.userprofile.Usergroup  # Assign usergroup from logged-in user
+            item.warehouse.Usergroup = request.user.userprofile.Usergroup  # Assign usergroup from logged-in user
             item.save()
             messages.success(request, 'Artikel erfolgreich erstellt!')
             return redirect('landing_page')
@@ -131,7 +131,7 @@ def user_group_update(request, pk):
 
 @login_required
 def warehouse_update(request, pk):
-    warehouse = get_object_or_404(Warehouse, pk=pk, Usergroup=request.user.userurofile.Usergroup)
+    warehouse = get_object_or_404(Warehouse, pk=pk)#, Usergroup=request.user.userurofile.Usergroup)
     if request.method == 'POST':
         form = WarehouseForm(request.POST, instance=warehouse)
         if form.is_valid():

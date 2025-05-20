@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Confirm delete</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Artikel erstellen{% endblock %}
+
+{% block content %}
+
     <h1>Really delete?</h1>
     <p>Are you sure you want to delete this user?</p>
     <ul>
@@ -12,7 +12,5 @@
     <form method="post">
         {% csrf_token %}
         <button type="submit">Yes, delete</button>
-        <a href="{% url 'kontrolluebersicht' %}">No, back to overview</a>
+        <a href="{% url 'landing_page' %}">No, back to overview</a>
     </form>
-</body>
-</html>
