@@ -131,7 +131,7 @@ def user_group_update(request, pk):
 
 @login_required
 def warehouse_update(request, pk):
-    warehouse = get_object_or_404(Warehouse, pk=pk, Usergroup=request.user.userprofile.Usergroup)
+    warehouse = get_object_or_404(Warehouse, pk=pk, Usergroup=request.user.userurofile.Usergroup)
     if request.method == 'POST':
         form = WarehouseForm(request.POST, instance=warehouse)
         if form.is_valid():
