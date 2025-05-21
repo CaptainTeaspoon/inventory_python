@@ -4,6 +4,7 @@
 
 {% block content %}
 
+<div class = "form-container">
 <h1>Edit usergroup</h1>
 <form method="post">
     {% csrf_token %}
@@ -14,4 +15,5 @@
 {% if error_message %}
     <p style="color: red;">{{ error_message }}</p>
 {% endif %}
+</div>
 {% endblock %}

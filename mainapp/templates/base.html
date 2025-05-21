@@ -17,6 +17,16 @@
         .item-list li { display: flex; justify-content: space-between; align-items: center; padding: 0.5em 0; border-bottom: 1px solid #eee; }
         .item-list li:last-child { border-bottom: none; }
         .delete-button { background-color: #f44336; color: white; border: none; padding: 0.5em 1em; text-align: center; text-decoration: none; display: inline-block; font-size: 0.9em; margin-left: 1em; cursor: pointer; border-radius: 3px; }
+        .form-container { max-width: 600px; margin: 20px auto; padding: 20px; background-color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        .form-container h1 { margin-bottom: 1em; }
+        .form-container form { display: flex; flex-direction: column; }
+        .form-container form input, .form-container form button, .form-container form select { margin-bottom: 1em; padding: 0.5em; border: 1px solid #ccc; border-radius: 3px; }
+        .form-container form input, .form-container form select { margin: auto; }
+        .form-container form button { background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        .form-container form button:hover { background-color: #45a049; }
+        .form-container a { text-decoration: none; color: #4CAF50; }
+        .error-messages { background-color: #f44336; color: white; padding: 1em; border-radius: 5px; margin-bottom: 1em; }
+        .error-messages h2 { margin: 0; }
         
         /* Dropdown Menu Styles */
         .dropdown {
