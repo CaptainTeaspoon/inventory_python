@@ -1,0 +1,139 @@
+[
+{
+  "model": "mainapp.usergroups",
+  "pk": 1,
+  "fields": {
+    "name": "Nobbi"
+  }
+},
+{
+  "model": "mainapp.usergroups",
+  "pk": 2,
+  "fields": {
+    "name": "Familie Schwein"
+  }
+},
+{
+  "model": "mainapp.users",
+  "pk": 1,
+  "fields": {
+    "password": "Nashorn123",
+    "name": "Nobbi",
+    "email": "Nobbi@Nashorn.com",
+    "usergroup": 1
+  }
+},
+{
+  "model": "mainapp.users",
+  "pk": 2,
+  "fields": {
+    "password": "Ruessel",
+    "name": "Schweinchen",
+    "email": "Swein@Rmail.com",
+    "usergroup": 2
+  }
+},
+{
+  "model": "mainapp.warehouse",
+  "pk": 1,
+  "fields": {
+    "name": "Scheune 1",
+    "usergroup": 1
+  }
+},
+{
+  "model": "mainapp.warehouse",
+  "pk": 2,
+  "fields": {
+    "name": "Scheune 2",
+    "usergroup": 1
+  }
+},
+{
+  "model": "mainapp.warehouse",
+  "pk": 3,
+  "fields": {
+    "name": "Scheune 1",
+    "usergroup": 2
+  }
+},
+{
+  "model": "mainapp.warehouse",
+  "pk": 4,
+  "fields": {
+    "name": "Scheune 2",
+    "usergroup": 2
+  }
+},
+{
+  "model": "mainapp.items",
+  "pk": 1,
+  "fields": {
+    "name": "10kg Savannengras",
+    "barcode": 37546237,
+    "cost": 45,
+    "expiration_date": null,
+    "warehouse": 1
+  }
+},
+{
+  "model": "mainapp.items",
+  "pk": 2,
+  "fields": {
+    "name": "10kg Savannengras",
+    "barcode": 37546237,
+    "cost": 45,
+    "expiration_date": null,
+    "warehouse": 1
+  }
+},
+{
+  "model": "mainapp.items",
+  "pk": 3,
+  "fields": {
+    "name": "10kg Saat",
+    "barcode": 23480938,
+    "cost": 60,
+    "expiration_date": "2025-12-23",
+    "warehouse": 1
+  }
+},
+{
+  "model": "mainapp.items",
+  "pk": 6,
+  "fields": {
+    "name": "1kg Äpfel",
+    "barcode": 41985411,
+    "cost": 2,
+    "expiration_date": "2025-04-30",
+    "warehouse": 2
+  }
+},
+{
+  "model": "mainapp.items",
+  "pk": 7,
+  "fields": {
+    "name": "10kg Äpfel",
+    "barcode": 11323412,
+    "cost": 20,
+    "expiration_date": "2025-05-15",
+    "warehouse": 3
+  }
+},
+{
+  "model": "mainapp.userprofile",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "Usergroup": 1
+  }
+},
+{
+  "model": "mainapp.userprofile",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "Usergroup": 2
+  }
+}
+]
