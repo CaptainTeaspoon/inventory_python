@@ -3,6 +3,7 @@
 {% block title %}Anmelden{% endblock %}
 
 {% block content %}
+<div class = "form-container">
     <h1>Anmelden</h1>
     {% if form.errors %}
         <p style="color: red;">Your username or password was incorrect</p>
@@ -27,5 +28,6 @@
         <p>{{ form.password.label_tag }} {{ form.password }}</p>
         <button type="submit">Log in</button>
     </form>
-    <p>Don't have an account yet? <a href="{% url 'register' %}">Register</a></p>
+    <p>Noch kein Account? <a href="{% url 'register' %}">Registrieren</a></p>
+</div>
 {% endblock %}
